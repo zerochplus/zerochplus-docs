@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<h1>{{page.title | escape}}</h1>
+
+{{content}}
+
+<hr>
+
+<p>
+  更新: {{ page.date | date: '%Y/%m/%d' }}
+  <!-- ↑これはフッタに入れるべきだ？ -->
+
+  {% if page.cgiver %}
+    想定バージョン: {{ page.cgiver }}
+  {% endif %}
+</p>
+
+<p>
+  <a href="../">戻る</a>
+</p>

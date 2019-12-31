@@ -1,0 +1,52 @@
+---
+layout: faq
+---
+
+{{ page.id }}
+
+{{ content }}
+
+{% assign fuck = site.faq %}
+
+{% if page.id != "/0" %}
+  {% assign hierarchy = page.id | split: "/" %}
+  {% assign subdir = hierarchy[-2] %}
+  {% assign fuck = fuck | where_exp: "item", "item.path contains subdir" %}
+{% endif %}
+
+{% for faq in fuck %}
+
+  {% assign hierarchy = faq.path | split: "/" %}
+  {% assign subdir = hierarchy[-2] %}
+  {% assign id = hierarchy.last | split: "." | first %}
+
+  {% if faq.id == page.id  %}
+    {% continue %}
+  {% elsif id == "0" %}
+    <h2 id="{{ subdir }}">
+      <a href="{{ faq.url }}">
+	{{ faq.title | escape }}
+      </a>
+    </h2>
+  {% else %}
+    <h3 id="{{ id }}">
+      <a href="{{ faq.url }}">
+	{{ faq.title | escape }}
+      </a>
+    </h3>
+  {% endif %}
+
+  <p>
+    サブディレクトリ: {{ subdir }}
+  </p>
+
+  {{ faq.content | markdownify }}
+
+  <p>
+    項目更新: {{ faq.date | date: '%Y/%m/%d' }}
+    {% if faq.cgiver %}
+      想定バージョン: {{ faq.cgiver }}
+    {% endif %}
+  </p>
+
+{% endfor %}
