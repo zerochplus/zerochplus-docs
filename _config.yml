@@ -1,1 +1,41 @@
 theme: jekyll-theme-dinky
+
+lang: ja
+title: "ぜろプラ実験室"
+
+markdown: kramdown
+
+kramdown:
+  input: GFM
+
+collections:
+  faq:
+    output: true
+
+defaults:
+  - 
+    scope: 
+      path: "*/index.*"
+      type: faq
+    values:
+      layout: faq-index
+      permalink: /:collection/
+  - 
+    scope: 
+      path: "*/*/index.*"
+      type: faq
+    values:
+      layout: faq-index
+      permalink: /:collection/:path:output_ext
+  - 
+    scope: 
+      path: ""
+      type: faq
+    values:
+      layout: faq
+      permalink: /:collection/details/:name:output_ext
+  -
+    scope: 
+      path: "" # empty = all
+    values:
+      layout: default
