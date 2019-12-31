@@ -8,7 +8,7 @@ layout: faq
 
 {% assign fuck = site.faq %}
 
-{% if page.id != "/0" %}
+{% if page.id != "/index" %}
   {% assign hierarchy = page.id | split: "/" %}
   {% assign subdir = hierarchy[-2] %}
   {% assign fuck = fuck | where_exp: "item", "item.path contains subdir" %}
@@ -22,7 +22,7 @@ layout: faq
 
   {% if faq.id == page.id  %}
     {% continue %}
-  {% elsif id == "0" %}
+  {% elsif id == "index" %}
     <h2 id="{{ subdir }}">
       <a href="{{ faq.url }}">
 	{{ faq.title | escape }}
